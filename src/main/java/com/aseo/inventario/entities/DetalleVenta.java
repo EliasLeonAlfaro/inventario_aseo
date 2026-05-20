@@ -1,6 +1,6 @@
 package com.aseo.inventario.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore; // Asegúrate de importar esto
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,7 +15,7 @@ public class DetalleVenta {
 
     @ManyToOne
     @JoinColumn(name = "venta_id", nullable = false)
-    @JsonIgnore // NUEVO: Evita que el JSON se vuelva infinito al serializar
+    @JsonIgnore
     private Venta venta;
 
     @ManyToOne
@@ -26,5 +26,9 @@ public class DetalleVenta {
     private Integer cantidad;
 
     @Column(name = "precio_unitario", nullable = false)
-    private Double precioUnitario;
+    private Double precioUnitario; // A cuánto lo vendiste
+
+    // 🔥 NUEVO: Guardamos el costo ponderado del momento para calcular la ganancia real
+    @Column(name = "costo_unitario_momento", nullable = false)
+    private Double costoUnitarioMomento;
 }

@@ -48,6 +48,7 @@ public class VentaService {
             detalle.setVenta(venta);
             detalle.setProducto(producto);
             detalle.setPrecioUnitario(producto.getPrecioVenta());
+            detalle.setCostoUnitarioMomento(producto.getCostoPonderado());
 
             totalVenta += detalle.getPrecioUnitario() * detalle.getCantidad();
 
@@ -60,5 +61,10 @@ public class VentaService {
         venta.setTotal(totalVenta);
 
         return ventaRepository.save(venta);
+
+    }
+    // 🔥 NUEVO: Obtener todas las ventas registradas para el historial
+    public List<Venta> obtenerTodasLasVentas() {
+        return ventaRepository.findAll();
     }
 }
